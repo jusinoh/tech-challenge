@@ -1,0 +1,39 @@
+# Technical Challenge TEKsystems
+
+## Part 1: Container Security Implementation
+
+### 1. Docker Security Best Practices
+
+- Never run the container as root, and instead create a user. 
+    - This prevents the container from escalalting its permissions which can lead to exploiting a vulnerability within the containers hosts, if there is a data mount on the host the container now can access that data. 
+
+- Do not allow container access to the Docker daemon
+    - The Docker daemon is owned by root, so allowing access to this can open up the environment to misuse from any containers, from modifying the environment to having access to all the resources within the evironment. Specifically tcp should not be enabled as this opens up unauthorized access and un-encrypted traffic to and from the daemon. info level logging should be enabled as well. 
+
+- Limit resource access to containers
+    - Avoid allowing unlimited acccess to memory and cpu access to ensure that min and max memory and cpu are clearly defined to ensure that the containers recieve what's necessary to stand up and necessary to operate without allocating all the resources of the environment. 
+
+```
+services:
+  my_service:
+    build: .
+    image: my_image
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: '512M'
+        reservations:
+          cpus: '0.25'
+          memory: '256M'
+```
+
+- Use Docker Secrets or other secrets management tool
+    - Sensitive pieces of data or variables that should not be hardcoded into the config files, instead use another secrets managements tool to pass these values at runtime.
+
+- Supply Chain Concerns
+    - Use a lightweight image such as alpine and build off of this for the microservices, develop SBOM for each microservice and use them to perform SCA scans to identify the web of vulnerabilities that open up due to these dependencies or container scanning tools, store images in a registry with strictly enforced access controls (ECS) and supports tagging to ensure the correct container version is being used during pipelines. In Dockerfiles, dependencies should also point to specific versions for tools being used as opposed to just pulling the latest version, as this helps teams manage change control within their environment as it pertains to dependencies. 
+
+### K8s Security Configuration:
+
+- 
