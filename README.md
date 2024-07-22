@@ -56,3 +56,5 @@ services:
 ## Part 2: CI/CD Pipeline Setup
 
 ### 1. Configuration Management with Terraform:
+
+- [Terraform](https://github.com/jusinoh/tech-challenge/tree/main/terraform)

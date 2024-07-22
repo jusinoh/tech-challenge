@@ -5,7 +5,7 @@ variable "instance_type" {
 
 variable "ami" {
   description = "Amazon Linux 2 AMI ID"
-  default     = "ami-0c55b159cbfafe1f0" # Replace with your region's AMI ID
+  default     = "ami-0b72821e2f351e396" # Replace with your region's AMI ID
 }
 
 variable "security_group_name" {
@@ -16,4 +16,21 @@ variable "security_group_name" {
 variable "tag_name" {
   description = "Tag name for the instance"
   default     = "WebServer"
+}
+
+variable "subnet_id" {
+  description = "ID of the subnet where the instance will be deployed"
+  default = "vpc-0f973f393187d8121"
+  # default     = "subnet-xxxxxxx" # Replace with your subnet ID
+}
+
+variable "vpc_id" {
+  description = "ID of the VPC"
+  default= "subnet-04f524d765d617da3"
+  # default     = "vpc-xxxxxxx" # Replace with your VPC ID
+}
+
+variable "root_volume_size" {
+  description = "Size of the root EBS volume in GB"
+  default     = 8
 }
