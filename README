@@ -47,8 +47,12 @@ services:
 
 ### 3. IaaS Security Measures:
 
-- Infrastructure as a Service provides teams with virtualized compute resources which has aspects of it that can be managed by the CSP themselves such as scalability, disaster and recovery, and updates/ patches. Although the CSP handles various items given their specific shared responsibility model, it's critical to ensure teams understand what they are ultimately responsible for and ensure secure config/ coding practices are documented and implemented on these resources that interact with the IaaS service. 
+- Infrastructure as a Service provides teams with virtualized compute resources which has aspects of it that can be managed by the CSP themselves such as scalability, disaster and recovery, and updates/ patches. Although the CSP handles various items given their specific shared responsibility model, it's critical to ensure teams understand what they are ultimately responsible for and ensure secure config/ coding practices are documented and implemented on these resources that interact with the IaaS service. Some of these items include data governance/ access management, endpoints, application configurations, network controls, OS configurations and more. 
     - Data at rest and in transit should always be verfied and configured (as an example, when dealing with Azure Storage accounts, by default TLS is not used)
     - Items such as security groups (host-based firewall), NACLs, Flow Logs, should be reviewed (if applicable) and configured properly in these models. 
     - Monitoring and Logging should always be reviewed. Although most services make them available, it is up to teams to configure and centralize these logs into buckets or other services/ tools to make the most of these logs. (i.e. WAF rules will block based on what's being identified given the set of rules applied, however, traffic and all other logs can be reviewed for malicious traffic that may be specific to your deployment or environment for malicious traffic)
     - As with anything else being deployed, access should be monitored for authentication/ authorization to ensure. For instance, in an EKS environment, each resource, nodes for instance, should point to other security groups for access, as opposed to IP addresses to avoid any sort of spoofing, as this validates where the traffic is originating from. 
+
+## Part 2: CI/CD Pipeline Setup
+
+### 1. Configuration Management with Terraform:
