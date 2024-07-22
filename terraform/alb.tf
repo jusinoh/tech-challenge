@@ -3,7 +3,7 @@ resource "aws_lb" "alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.web_server_sg.id]
-  subnets            = [var.subnet_id]
+  subnets            = [var.subnets_id]
 
   enable_deletion_protection = false
 
@@ -17,7 +17,7 @@ resource "aws_lb_target_group" "tg" {
   port        = 80
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
-  
+
 
   health_check {
     path                = "/"

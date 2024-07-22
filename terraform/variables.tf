@@ -18,9 +18,14 @@ variable "tag_name" {
   default     = "WebServer"
 }
 
+variable "subnets_id" {
+  description = "ID of the ALB Subnets"
+  default     = ["subnet-0220a9bfd922dd49f", "subnet-0502891a0e87ca7db"]
+}
+
 variable "subnet_id" {
   description = "ID of the subnet where the instance will be deployed"
-  default = "subnet-0220a9bfd922dd49f"
+  default     = "subnet-0220a9bfd922dd49f"
   # default     = "subnet-xxxxxxx" # Replace with your subnet ID
 }
 

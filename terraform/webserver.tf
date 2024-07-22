@@ -2,10 +2,10 @@ resource "aws_instance" "web_server" {
   ami           = var.ami
   instance_type = var.instance_type
   subnet_id     = var.subnet_id
-  security_groups = [aws_security_group.web_server_sg.name]
+  vpc_security_group_ids = [aws_security_group.web_server_sg.id]
 
   ## A key is not used in this situation because an Amazon Linux AMI is used
-  ## Amazon Linux AMI supports Direct Connect and the key is manaaged by AWS backend services
+  ## Amazon Linux AMI supports Direct Connect and the key is managed by AWS backend services
   ## This helps remove the likelihood of poorly managed access keys (pem file) and access comes directly from authenticated AWS users
 
   tags = {
@@ -27,7 +27,7 @@ resource "aws_instance" "web_server" {
   }
 
   ## Ensures IMDSv2 is used, as v1 is the default and enables non-authenticated traffic to instance
-  ## Hop limit is set to 2 to accomidate container orchestration environments and helps prevent lateral movement across the internal network
+  ## Hop limit is set to 2 to accommodate container orchestration environments and helps prevent lateral movement across the internal network
 
   user_data = <<-EOF
               #!/bin/bash
