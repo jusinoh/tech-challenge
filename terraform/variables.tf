@@ -20,13 +20,13 @@ variable "tag_name" {
 
 variable "subnet_id" {
   description = "ID of the subnet where the instance will be deployed"
-  default = "vpc-0f973f393187d8121"
+  default = "subnet-0220a9bfd922dd49f"
   # default     = "subnet-xxxxxxx" # Replace with your subnet ID
 }
 
 variable "vpc_id" {
   description = "ID of the VPC"
-  default= "subnet-0220a9bfd922dd49f"
+  default= "vpc-0f973f393187d8121"
   # default     = "vpc-xxxxxxx" # Replace with your VPC ID
 }
 
