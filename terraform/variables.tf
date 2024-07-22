@@ -26,7 +26,7 @@ variable "subnet_id" {
 
 variable "vpc_id" {
   description = "ID of the VPC"
-  default= "subnet-04f524d765d617da3"
+  default= "subnet-0220a9bfd922dd49f"
   # default     = "vpc-xxxxxxx" # Replace with your VPC ID
 }
 

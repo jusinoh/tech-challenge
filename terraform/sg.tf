@@ -1,6 +1,7 @@
 resource "aws_security_group" "web_server_sg" {
   name        = var.security_group_name
   description = "Allow HTTP and SSH traffic"
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 22
