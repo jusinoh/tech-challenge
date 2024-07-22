@@ -1,7 +1,27 @@
+resource "aws_security_group" "alb_sg" {
+  name        = var.security_group_name_alb
+  description = "Allow HTTP traffic"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_security_group" "web_server_sg" {
-  name        = var.security_group_name
-  description = "Allow HTTP and SSH traffic"
-  vpc_id = var.vpc_id
+  name        = var.security_group_name_web
+  description = "Allow SSH traffic and HTTP traffic from ALB"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 22
@@ -11,10 +31,10 @@ resource "aws_security_group" "web_server_sg" {
   }
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    security_groups  = [aws_security_group.alb_sg.id]
   }
 
   egress {

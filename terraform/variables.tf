@@ -8,19 +8,20 @@ variable "ami" {
   default     = "ami-0b72821e2f351e396" # Replace with your region's AMI ID
 }
 
-variable "security_group_name" {
-  description = "Security group name"
+variable "security_group_name_web" {
+  description = "Security group name for the web server"
   default     = "web_server_sg"
 }
+
+variable "security_group_name_alb" {
+  description = "Security group name for the ALB"
+  default     = "alb_sg"
+}
+
 
 variable "tag_name" {
   description = "Tag name for the instance"
   default     = "WebServer"
-}
-
-variable "subnets_id" {
-  description = "ID of the ALB Subnets"
-  default     = ["subnet-0220a9bfd922dd49f", "subnet-0502891a0e87ca7db"]
 }
 
 variable "subnet_id" {

@@ -2,7 +2,7 @@ resource "aws_lb" "alb" {
   name               = "web-server-alb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.web_server_sg.id]
+  security_groups    = [aws_security_group.alb_sg.id]
   subnets            = ["subnet-0220a9bfd922dd49f", "subnet-0502891a0e87ca7db"]
 
   enable_deletion_protection = false
@@ -18,7 +18,6 @@ resource "aws_lb_target_group" "tg" {
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
 
-
   health_check {
     path                = "/"
     interval            = 30
@@ -27,6 +26,9 @@ resource "aws_lb_target_group" "tg" {
     unhealthy_threshold = 2
     matcher             = "200"
   }
+
+  ## Ensure the health of the app can be monitored
+  ## Can be used in conjunction with kicking off additional automation to move to another instance in the target ID group
 
   tags = {
     Name = "web-server-tg"

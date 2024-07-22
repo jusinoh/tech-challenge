@@ -17,6 +17,7 @@ resource "aws_instance" "web_server" {
     volume_type           = "gp2"
     delete_on_termination = true
     encrypted             = true
+    ## Ensures the root volume is encrypted at rest
   }
 
   ## Encryption at rest for local volume
@@ -30,11 +31,18 @@ resource "aws_instance" "web_server" {
   ## Hop limit is set to 2 to accommodate container orchestration environments and helps prevent lateral movement across the internal network
 
   user_data = <<-EOF
-              #!/bin/bash
-              yum update -y
-              yum install -y httpd
-              systemctl start httpd
-              systemctl enable httpd
-              echo "Hello, World!" > /var/www/html/index.html
+              sudo yum update -y
+              sudo yum install -y httpd
+              sudo systemctl start httpd
+              sudo systemctl enable httpd
+              echo '<!DOCTYPE html>
+              <html>
+              <head>
+                  <title>Welcome</title>
+              </head>
+              <body>
+                  <h1>Hello, Friend!</h1>
+              </body>
+              </html>' | sudo tee /var/www/html/index.html
               EOF
 }
