@@ -22,6 +22,9 @@
 7. **Geo Restriction**
    - Restricts access to the CloudFront distribution to specified countries, reducing the risk of unauthorized access from other locations.
 
+8. **WAF**
+   - Reviews all incoming traffic and applies various rulesets against it to identify malicious traffic.
+
 # Security Considerations in CI/CD Pipeline
 
 1. **AWS Credentials Configuration**
