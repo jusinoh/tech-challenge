@@ -32,7 +32,9 @@ services:
     - Sensitive pieces of data or variables that should not be hardcoded into the config files, instead use another secrets managements tool to pass these values at runtime.
 
 - Supply Chain Concerns
-    - Use a lightweight image such as alpine and build off of this for the microservices, develop SBOM for each microservice and use them to perform SCA scans to identify the web of vulnerabilities that open up due to these dependencies or container scanning tools, store images in a registry with strictly enforced access controls (ECS) and supports tagging to ensure the correct container version is being used during pipelines. In Dockerfiles, dependencies should also point to specific versions for tools being used as opposed to just pulling the latest version, as this helps teams manage change control within their environment as it pertains to dependencies. 
+    - Use a lightweight image such as alpine and build off of this for the microservices, develop SBOM for each microservice and use them to perform SCA scans to identify the web of vulnerabilities that open up due to these dependencies or container scanning tools, store images in a registry with strictly enforced access controls (ECS) and supports tagging to ensure the correct container version is being used during pipelines. In Dockerfiles, dependencies should also point to specific versions for tools being used as opposed to just pulling the latest version, as this helps teams manage change control within their environment as it pertains to dependencies.
+ 
+[Example of Dockerfile Best Practices](https://github.com/jusinoh/tech-challenge/blob/main/Dockerfile)
 
 ### 2. K8s Security Configuration:
 
