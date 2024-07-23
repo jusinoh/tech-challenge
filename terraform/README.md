@@ -1,6 +1,6 @@
 # AWS Setup with Terraform: ALB and EC2 Instance
 
-## This guide will walk you through setting up an AWS environment with an Application Load Balancer (ALB) and an EC2 instance serving a simple web page using Terraform. The setup includes configuring security groups to allow proper communication between the ALB and the EC2 instance.
+- This guide will walk you through setting up an AWS environment with an Application Load Balancer (ALB) and an EC2 instance serving a simple web page using Terraform. The setup includes configuring security groups to allow proper communication between the ALB and the EC2 instance.
 
 ## Prerequisites
 
