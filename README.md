@@ -59,4 +59,6 @@ services:
 
 - [Terraform](https://github.com/jusinoh/tech-challenge/tree/main/terraform)
 
-### 2. 
+### 2. CI/CD Pipeline Configuration:
+
+- [GitHub Actions](https://github.com/jusinoh/tech-challenge/tree/main/github-actions)
