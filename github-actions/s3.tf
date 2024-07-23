@@ -18,6 +18,13 @@ locals {
   s3_origin_id = "myS3Origin"
 }
 
+resource "aws_s3_object" "object" {
+  bucket = aws_s3_bucket.b.bucket
+  key    = "index.html"
+  source = "index.html"
+  etag = filemd5("index.html")
+}
+
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name = aws_s3_bucket.b.bucket_regional_domain_name
