@@ -6,15 +6,11 @@ on:
       - main
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -27,13 +23,28 @@ jobs:
       - name: Lint HTML
         run: htmlhint index.html
 
+  iac_security_scanner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Security Scan with KICS
+        run: docker run -t -v "$(pwd)":/path checkmarx/kics:latest scan -p /path -o "/path/" || true
+
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
       - name: Install AWS CLI
         run: |
           sudo apt-get update
           sudo apt-get install -y awscli
-
-      - name: Security Scan with KICS
-        run: docker run -t -v "$(pwd)":/path checkmarx/kics:latest scan -p /path -o "/path/" || true
 
       - name: Configure AWS credentials
         env:
@@ -44,7 +55,14 @@ jobs:
           aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
           aws configure set default.region us-east-1
 
+      - name: Testing Deployment
+        run: |
+          terraform init
+          terraform validate          
+
       - name: Buildout S3
         run: |
           terraform init
           terraform apply -auto-approve
+
+      
